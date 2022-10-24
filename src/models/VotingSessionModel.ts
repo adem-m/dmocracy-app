@@ -5,4 +5,5 @@ export interface VotingSessionModel {
   chairman: string;
   description: string;
   proposals: ProposalModel[];
+  isOpen: boolean;
 }

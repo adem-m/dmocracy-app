@@ -1,7 +1,7 @@
 import VotingSessionList from "../components/voting-session-list";
 import { listVotingSessions } from "../services/mocks/VotingSessionServiceMock";
 
-export function VotingSessions() {
+export function VotingSessionsPage() {
   return (
     <>
       <h2>Active voting sessions</h2>
@@ -10,4 +10,4 @@ export function VotingSessions() {
   );
 }
 
-export default VotingSessions;
+export default VotingSessionsPage;

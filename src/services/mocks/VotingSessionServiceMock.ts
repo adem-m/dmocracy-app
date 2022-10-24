@@ -17,16 +17,19 @@ export async function listVotingSessions(): Promise<VotingSessionModel[]> {
     id: "1",
     chairman: "Chairman 1",
     description: "Voting Session n°1",
-    proposals
+    proposals,
+    isOpen: true
   }, {
     id: "2",
     chairman: "Chairman 2",
     description: "Voting Session n°2",
-    proposals
+    proposals,
+    isOpen: false
   },{
     id: "3",
     chairman: "Chairman 3",
     description: "Voting Session n°3",
-    proposals
-  },]
+    proposals,
+    isOpen: true
+  }];
 }

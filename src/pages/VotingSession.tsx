@@ -1,9 +1,17 @@
-import { useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom";
+import VotingSession from "../components/voting-session";
+import { VotingSessionModel } from "../models/VotingSessionModel";
 
-function VotingSession() {
-  const { votingSessionId } = useParams();
+function VotingSessionPage() {
+  const { state } = useLocation();
+  const votingSession = (state as VotingSessionModel)
 
-  return (<h1>Voting Session n°{votingSessionId}</h1>);
+  return (
+    <>
+      <h2>Voting Session n°{votingSession.id}</h2>
+      <VotingSession votingSession={votingSession}/>
+    </>
+  );
 }
 
-export default VotingSession;
+export default VotingSessionPage;

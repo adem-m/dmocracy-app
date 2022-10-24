@@ -18,7 +18,7 @@ function VotingSessionList({ getVotingSessions }: PropType) {
   
   return (      
     <ul className={styles.votingSessionList}>
-      {votingSessions.map(vs => (<VotingSessionItem votingSession={vs}/>))}
+      {votingSessions.map((vs, idx) => (<VotingSessionItem key={idx} votingSession={vs}/>))}
     </ul>
   );
 }
