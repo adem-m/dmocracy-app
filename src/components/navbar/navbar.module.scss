@@ -1,0 +1,34 @@
+.navbar {
+  width: 100%;
+  height: 15%;
+  background-color: mediumseagreen;
+  color: black;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 1em;
+
+  a {
+    color: white;
+    transition: all 500ms;
+  }
+
+  a:hover {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  a:visited {
+    color: white;
+    border-bottom: 0;
+  }
+}
+
+.navLink {
+  border-bottom: 0;
+}
+
+.navLinkActive {
+  border-bottom: 3px solid white;
+  transition: border-bottom .5s ease-in-out;
+}
