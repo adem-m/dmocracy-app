@@ -1,30 +1,113 @@
-.navbar {
-  width: 100%;
-  height: 15%;
-  background-color: mediumseagreen;
-  color: black;
-  display: flex;
-  justify-content: space-evenly;
-  margin: 0;
-  padding: 1em;
+// .navbar {
+//   width: 100%;
+//   height: 15%;
+//   margin: 0;
+//   padding: 0;
+//   color: white;
+//   font-size: 18px;
 
-  a {
+//   div {
+//     margin: 5px 10px;
+//     padding: .5em;
+//     background-color: mediumseagreen;
+//     display: flex;
+//     justify-content: flex-start;
+//     align-items: baseline;
+//     gap: 100px;
+
+//     a {
+//       transition: all 500ms;
+//       border-bottom: 0;
+  
+//       &:hover {
+//         font-size: 20px;
+//         font-weight: 800;
+//       }
+  
+//       &:visited {
+//         color: white;
+//       }
+  
+//       &.navLinkActive {
+//         border-bottom: 2px solid white;
+//       }
+//     }
+
+//     button {
+//       background-color: black;
+//       border-radius: 25px;
+//       margin-left: auto;
+//     }
+//   }
+// }
+
+a {
+  transition: all 500ms;
+  margin-right: 20px;
+  color: white;
+
+  &:visited {
     color: white;
-    transition: all 500ms;
-    border-bottom: 0;
+  }
 
-    &:hover {
-      font-size: 18px;
-      font-weight: 800;
-    }
+  &:hover {
+    font-size: 20px;
+    font-weight: 800;
+    color: white !important;
+  }
 
-    &:visited {
-      color: white;
-    }
+  &.navLink {
+    border-bottom: none;
+  }
 
-    &.navLinkActive {
-      border-bottom: 3px solid white;
-    }
+  &.navLinkActive {
+    border-bottom: 2px solid white;
   }
 }
 
+.mobileMenu {
+  background-color: rgba(5, 14, 31, 0.224);
+
+  &:nth-child(3) ul {
+    background-color: cornflowerblue;
+  }
+}
+
+.connectionBtn {
+  color: #1976d2;
+  background-color:white;
+}
+
+// .navLink {
+//   transition: all 500ms;
+//   border-bottom: 0;
+//   margin-right: 20px;
+//   color: white;
+
+//   &:visited {
+//     color: white;
+//   }
+
+//   &:hover {
+//     font-size: 20px;
+//     font-weight: 800;
+//     color: white;
+//   }
+// }
+
+// .navLinkActive {
+//   color: white;
+//   margin-right: 20px;
+//   border-bottom: 2px solid white;
+//   transition: all 500ms;
+
+//   &:visited {
+//     color: white;
+//   }
+
+//   &:hover {
+//     font-size: 20px;
+//     font-weight: 800;
+//     color: white;
+//   }
+// }

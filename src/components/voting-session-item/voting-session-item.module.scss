@@ -1,8 +1,14 @@
 .item {
   cursor: pointer;
   list-style: none;
-  border: 1px solid white;
+  border: 1px solid #0a0a0a;
   border-radius: 25px;
   width: 80%;
   margin-bottom: 20px;
+
+  &:hover {
+    color: #f1f1f1;
+    background-color: #368be0;
+    transition: background-color .5s ease-in-out;
+  }
 }
