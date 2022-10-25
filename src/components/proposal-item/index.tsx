@@ -1,7 +1,7 @@
 import { ProposalModel } from "../../models/ProposalModel";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import { useState } from "react";
+import styles from "./proposal-item.module.scss";
 
 /**
  * if isVotingModeOn is true, 
@@ -17,7 +17,7 @@ interface PropType {
 
 function ProposalItem({ index, proposal, isVotingModeOn, onScoreUpdated }: PropType) {
   return (
-    <li>
+    <li className={styles.proposalItem}>
       <div>
         <p>{proposal.content}</p>
         { isVotingModeOn

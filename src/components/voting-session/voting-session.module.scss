@@ -1,0 +1,17 @@
+.votingSessionContainer {
+  display: flex;
+  flex-direction: column;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    row-gap: 30px;
+  }
+
+  button {
+    margin: 20px auto 0;
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { VotingSessionModel } from "../../models/VotingSessionModel";
 import ProposalItem from "../proposal-item";
+import styles from "./voting-session.module.scss";
 
 interface PropType {
   votingSession: VotingSessionModel
@@ -30,7 +31,7 @@ function VotingSession({ votingSession }: PropType) {
 
 
   return (
-    <div>
+    <div className={styles.votingSessionContainer}>
       <p onClick={_ => setIsOpen(!isOpen)}>Chairman: {votingSession.chairman}</p>
       <p>{votingSession.description}</p>
       <ul>
@@ -43,11 +44,11 @@ function VotingSession({ votingSession }: PropType) {
             onScoreUpdated={onScoreUpdated2}/>
           )
         )}
-        {isOpen
-          ? <button onClick={_ => alert(ratings)}>Vote</button>
-          : <></>
-        }
       </ul>
+      {isOpen
+        ? <button onClick={_ => alert(ratings)}>Vote</button>
+        : <></>
+      }
     </div>
   );
 }

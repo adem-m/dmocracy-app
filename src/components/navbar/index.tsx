@@ -129,10 +129,23 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box 
+            sx={{ 
+              flexGrow: 0, 
+              display: "flex", 
+              flexDirection: "row", 
+              alignItems: "baseline" 
+          }}>
+            <Typography
+              sx={{
+                mr: 2,
+                display: { xs: "none", lg: "flex" }
+            }}>
+              {address}
+            </Typography>
             <Tooltip title={isConnected ? "Disconnect Wallet" : "Connect Wallet"}>
               { isConnected 
-                ? <button className={styles.disconnectionBtn} onClick={_ => disconnect()}>{address}</button>
+                ? <button className={styles.disconnectionBtn} onClick={_ => disconnect()}>Disconnect Wallet</button>
                 : <button className={styles.connectionBtn} onClick={_ => connect()}>Connect Wallet</button>
               }
             </Tooltip>

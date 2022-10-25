@@ -1,0 +1,18 @@
+.proposalItem {
+  list-style: none;
+  flex-basis: calc(33.3333% - 2em);
+  border: 1px solid black;
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .proposalItem {
+    flex-basis: calc(50% - 2em);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .proposalItem {
+    flex-basis: calc(100% - 2em);
+  }
+}
