@@ -11,24 +11,20 @@
   a {
     color: white;
     transition: all 500ms;
-  }
-
-  a:hover {
-    font-size: 18px;
-    font-weight: 800;
-  }
-
-  a:visited {
-    color: white;
     border-bottom: 0;
+
+    &:hover {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    &:visited {
+      color: white;
+    }
+
+    &.navLinkActive {
+      border-bottom: 3px solid white;
+    }
   }
 }
 
-.navLink {
-  border-bottom: 0;
-}
-
-.navLinkActive {
-  border-bottom: 3px solid white;
-  transition: border-bottom .5s ease-in-out;
-}
