@@ -69,13 +69,18 @@ a {
   background-color: rgba(5, 14, 31, 0.224);
 
   &:nth-child(3) ul {
-    background-color: cornflowerblue;
+    background-color: #1976d2;
   }
 }
 
 .connectionBtn {
   color: #1976d2;
   background-color:white;
+}
+
+.disconnectionBtn {
+  color: white;
+  background-color:rgb(143, 16, 16);
 }
 
 // .navLink {

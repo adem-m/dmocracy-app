@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { NavLink } from "react-router-dom";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -21,7 +22,11 @@ const pages = {
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [isConnected, setIsConnected] = React.useState(false);
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -100,7 +105,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -125,12 +130,10 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={isConnected ? "Disconnect Wallet" : "Connect Wallet"}>
               { isConnected 
-                ? <IconButton sx={{ p: 0 }} onClick={_ => setIsConnected(false)}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                  </IconButton>
-                : <button className={styles.connectionBtn} onClick={_ => setIsConnected(true)}>Connect Wallet</button>
+                ? <button className={styles.disconnectionBtn} onClick={_ => disconnect()}>{address}</button>
+                : <button className={styles.connectionBtn} onClick={_ => connect()}>Connect Wallet</button>
               }
             </Tooltip>
           </Box>

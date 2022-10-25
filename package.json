@@ -13,10 +13,12 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.10",
+    "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "wagmi": "^0.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

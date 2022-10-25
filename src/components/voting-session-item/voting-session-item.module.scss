@@ -3,12 +3,25 @@
   list-style: none;
   border: 1px solid #0a0a0a;
   border-radius: 25px;
-  width: 80%;
+  width: 50%;
   margin-bottom: 20px;
+  transition: all .5s ease-out;
 
   &:hover {
     color: #f1f1f1;
-    background-color: #368be0;
-    transition: background-color .5s ease-in-out;
+    background-color: #2f679f;
+    transition: all .5s ease-in;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .item {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .item {
+    width: 80%;
   }
 }
