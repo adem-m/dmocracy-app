@@ -32,7 +32,7 @@ function MyVotingSessionList({ wallet, getVotingSessions }: PropType) {
   } 
   
   return (      
-    <ul className={styles.myVotingSessionList} onClick={async _ => await iterList(votingSessions)}>
+    <ul className={styles.myVotingSessionList}>
       {votingSessions.map((vs, idx) => (
         <MyVotingSessionItem key={idx} votingSession={vs}/>
       ))}

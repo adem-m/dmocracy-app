@@ -26,7 +26,7 @@ function VotingSessionList({ getVotingSessions }: PropType) {
   }, []);
   
   return (      
-    <ul className={styles.votingSessionList} onClick={async _ => await iterList()}>
+    <ul className={styles.votingSessionList}>
       {votingSessions.map((vs, idx) => (<VotingSessionItem key={idx} votingSession={vs}/>))}
     </ul>
   );

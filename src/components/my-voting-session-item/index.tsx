@@ -15,9 +15,10 @@ function MyVotingSessionItem({ votingSession }: PropType ) {
         className={styles.item}
         onClick={_ => navigate(`/voting-sessions/${votingSession.id}`)}
       >
+        <p>Status: <b>{votingSession.isOpen ? "Open" : "Closed"}</b></p>
         <p>Description: {votingSession.description}</p>
       </div>
-      {votingSession.isOpen || <button>Close</button>}
+      {!votingSession.isOpen || <button>Close</button>}
     </li>
   );
 }
