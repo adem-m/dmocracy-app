@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 const Home = lazy(() => import("./pages/Home"));
 const VotingSessions = lazy(() => import("./pages/VotingSessions"));
 const VotingSession = lazy(() => import("./pages/VotingSession"));
+const NewVotingSession = lazy(() => import("./pages/NewVotingSession"));
 
 function AppRouter() {
   return (
@@ -24,6 +25,12 @@ function AppRouter() {
           path={"/voting-sessions/:votingSessionId"}
           element={<VotingSession/>}
           />
+
+        <Route
+          key={"newVotingSession"}
+          path={"/new-voting-session"}
+          element={<NewVotingSession/>}
+        />
 
         <Route
           key={"default"}

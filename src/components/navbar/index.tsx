@@ -17,7 +17,8 @@ import styles from "./navbar.module.scss";
 
 const pages = {
   "Home": "/",
-  "Voting Sessions": "/voting-sessions"
+  "Voting Sessions": "/voting-sessions",
+  "Create Voting Session": "/new-voting-session"
 }
 
 function ResponsiveAppBar() {
