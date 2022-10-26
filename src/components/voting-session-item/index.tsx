@@ -12,7 +12,7 @@ function VotingSessionItem({ votingSession }: PropType) {
   return (
     <li 
       className={styles.item}
-      onClick={_ => navigate(`/voting-sessions/${votingSession.id}`, { state: votingSession })}>
+      onClick={_ => navigate(`/voting-sessions/${votingSession.id}`)}>
       <div>
         <p>Chairman: {votingSession.chairman}</p>
         <p>Description: {votingSession.description}</p>

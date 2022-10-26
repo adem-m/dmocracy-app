@@ -1,5 +1,4 @@
 import { ProposalModel } from "../../models/ProposalModel";
-import { VotingSessionModel } from "../../models/VotingSessionModel";
 import { GetVotingSession, ListVotingSessions } from "../definitions/VotingSessionService";
 
 const proposals: ProposalModel[] = [{

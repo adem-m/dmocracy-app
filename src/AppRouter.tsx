@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { getVotingSessionMock } from "./services/mocks/VotingSessionServiceMock";
 
 const Home = lazy(() => import("./pages/Home"));
 const VotingSessions = lazy(() => import("./pages/VotingSessions"));
@@ -23,7 +24,7 @@ function AppRouter() {
         <Route
           key={"votingSession"}
           path={"/voting-sessions/:votingSessionId"}
-          element={<VotingSession/>}
+          element={<VotingSession getVotingSession={getVotingSessionMock} />}
           />
 
         <Route

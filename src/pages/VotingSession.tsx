@@ -1,10 +1,27 @@
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import VotingSession from "../components/voting-session";
 import { VotingSessionModel } from "../models/VotingSessionModel";
+import { GetVotingSession } from "../services/definitions/VotingSessionService";
 
-function VotingSessionPage() {
-  const { state } = useLocation();
-  const votingSession = (state as VotingSessionModel)
+interface PropType {
+  getVotingSession: GetVotingSession
+}
+
+function VotingSessionPage({ getVotingSession }: PropType) {
+  const { votingSessionId } = useParams();
+  const [votingSession, setVotingSession] = useState<VotingSessionModel | null>(null);
+
+  useEffect(() => {
+    if (typeof votingSessionId !== "string") { return; }
+    getVotingSession(votingSessionId)
+      .then(vs => setVotingSession(vs))
+      .catch(console.error)
+  }, [])
+
+  if (votingSession === null) {
+    return (<></>);
+  }
 
   return (
     <>
