@@ -20,16 +20,6 @@ function VotingSession({ votingSession }: PropType) {
     setRatings(newRatings);
   }
 
-  function onScoreUpdated2(index: number, newScore: number) {
-    if (index < 0 || votingSession.proposals.length <= index) { return; }
-    if (newScore < 1 || 5 < newScore) { return; }
-
-    const newRatings = [...ratings];
-    newRatings[index] = Math.floor(newScore);
-    setRatings(newRatings);
-  }
-
-
   return (
     <div className={styles.votingSessionContainer}>
       <p onClick={_ => setIsOpen(!isOpen)}>Chairman: {votingSession.chairman}</p>
@@ -41,7 +31,7 @@ function VotingSession({ votingSession }: PropType) {
             index={idx} 
             proposal={p} 
             isVotingModeOn={isOpen} 
-            onScoreUpdated={onScoreUpdated2}/>
+            onScoreUpdated={onScoreUpdated}/>
           )
         )}
       </ul>
