@@ -1,5 +1,5 @@
 import { ProposalModel } from "../../models/ProposalModel";
-import { GetVotingSession, ListVotingSessions } from "../definitions/VotingSessionService";
+import { GetVotingSession, ListVotingSessions, ListVotingSessionsByChairman } from "../definitions/VotingSessionService";
 
 const proposals: ProposalModel[] = [{
   content: "Proposal 1",
@@ -32,6 +32,10 @@ const votingSessions = [{
   isOpen: true
 }];
 
+export const getVotingSessionMock: GetVotingSession = async (id: string) => {
+  return votingSessions.find(vs => vs.id === id) ?? votingSessions[0];
+}
+
 export const listVotingSessionsMock: ListVotingSessions = async function* (limit, offset) {
   while(offset < 3) {
     const res = votingSessions;
@@ -40,6 +44,11 @@ export const listVotingSessionsMock: ListVotingSessions = async function* (limit
   }
 }
 
-export const getVotingSessionMock: GetVotingSession = async (id: string) => {
-  return votingSessions.find(vs => vs.id === id) ?? votingSessions[0];
-}
+export const listVotingSessionsByChairmanMock: ListVotingSessionsByChairman = 
+  async function*(chairman, limit, offset) {
+    while(offset < 3) {
+      const res = votingSessions;
+      yield res;
+      offset += 1;
+    }
+  }

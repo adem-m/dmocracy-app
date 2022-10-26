@@ -1,11 +1,13 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import WalletGuard from "./guards/wallet-guard";
 import { getVotingSessionMock } from "./services/mocks/VotingSessionServiceMock";
 
 const Home = lazy(() => import("./pages/Home"));
 const VotingSessions = lazy(() => import("./pages/VotingSessions"));
 const VotingSession = lazy(() => import("./pages/VotingSession"));
 const NewVotingSession = lazy(() => import("./pages/NewVotingSession"));
+const MyVotingSessions = lazy(() => import("./pages/MyVotingSessions"));
 
 function AppRouter() {
   return (
@@ -31,6 +33,12 @@ function AppRouter() {
           key={"newVotingSession"}
           path={"/new-voting-session"}
           element={<NewVotingSession/>}
+        />
+
+        <Route
+          key={"myVotingSessions"}
+          path={"/my-voting-sessions"}
+          element={<WalletGuard Component={MyVotingSessions} props={{}}/>}
         />
 
         <Route
