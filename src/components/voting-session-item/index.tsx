@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { VotingSessionModel } from "../../models/VotingSessionModel";
+import { VotingSessionItemModel } from "../../models/VotingSessionItemModel";
 import styles from "./voting-session-item.module.scss";
 
 interface PropType {
-  votingSession: VotingSessionModel
+  votingSession: VotingSessionItemModel
 }
 
 function VotingSessionItem({ votingSession }: PropType) {

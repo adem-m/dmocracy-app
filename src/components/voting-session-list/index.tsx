@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { VotingSessionModel } from "../../models/VotingSessionModel";
-import { ListVotingSessions } from "../../services/defintitions/VotingSessionService";
+import { VotingSessionItemModel } from "../../models/VotingSessionItemModel";
+import { ListVotingSessions } from "../../services/definitions/VotingSessionService";
 import VotingSessionItem from "../voting-session-item";
 import styles from "./voting-session-list.module.scss";
 
@@ -9,16 +9,24 @@ interface PropType {
 }
 
 function VotingSessionList({ getVotingSessions }: PropType) {
-  const [votingSessions, setVotingSessions] = useState<VotingSessionModel[]>([]);
+  const [votingSessions, setVotingSessions] = useState<VotingSessionItemModel[]>([]);
+  const ite = getVotingSessions(20, 0);
+
+  async function iterList() {
+    ite.next()
+      .then(vs => {
+        if (vs.value === undefined) { return; }
+        setVotingSessions(votingSessions.concat(vs.value))
+      })
+      .catch(err => alert(err.message));
+  } 
 
   useEffect(() => {
-    getVotingSessions(1, 1)
-      .then(vs => setVotingSessions(votingSessions.concat(vs)))
-      .catch(err => alert(err.message));
+    iterList();
   }, []);
   
   return (      
-    <ul className={styles.votingSessionList}>
+    <ul className={styles.votingSessionList} onClick={async _ => await iterList()}>
       {votingSessions.map((vs, idx) => (<VotingSessionItem key={idx} votingSession={vs}/>))}
     </ul>
   );

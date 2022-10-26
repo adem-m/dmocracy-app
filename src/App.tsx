@@ -6,7 +6,7 @@ import AppRouter from "./AppRouter";
 import Navbar from "./components/navbar";
 
 const web3Client = createClient({
-  autoConnect: true,
+  autoConnect: false,
   provider: getDefaultProvider()
 });
 

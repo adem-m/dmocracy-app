@@ -1,6 +1,6 @@
 import { ProposalModel } from "../../models/ProposalModel";
 import { VotingSessionModel } from "../../models/VotingSessionModel";
-import { GetVotingSession, ListVotingSessions } from "../defintitions/VotingSessionService";
+import { GetVotingSession, ListVotingSessions } from "../definitions/VotingSessionService";
 
 const proposals: ProposalModel[] = [{
   content: "Proposal 1",
@@ -33,8 +33,12 @@ const votingSessions = [{
   isOpen: true
 }];
 
-export const listVotingSessionsMock: ListVotingSessions = async (_: number, __: number) => {
-  return votingSessions;
+export const listVotingSessionsMock: ListVotingSessions = async function* (limit, offset) {
+  while(offset < 3) {
+    const res = votingSessions;
+    yield res;
+    offset += 1;
+  }
 }
 
 export const getVotingSessionMock: GetVotingSession = async (id: string) => {
