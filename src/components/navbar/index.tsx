@@ -93,6 +93,7 @@ function ResponsiveAppBar() {
               {Object.entries(pages).map(([key, value]: [string, string]) => (
                 <MenuItem key={key} onClick={handleCloseNavMenu}>
                   <NavLink 
+                    key={key}
                     className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
                     to={value} end>
                       {key}
@@ -123,6 +124,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {Object.entries(pages).map(([key, value]: [string, string]) => (
               <NavLink 
+                key={key}
                 className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
                 to={value} end>
                 {key}
