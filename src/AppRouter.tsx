@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import WalletGuard from "./guards/wallet-guard";
+import { useAccount } from "wagmi";
 import { getVotingSessionMock } from "./services/mocks/VotingSessionServiceMock";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -10,6 +10,8 @@ const NewVotingSession = lazy(() => import("./pages/NewVotingSession"));
 const MyVotingSessions = lazy(() => import("./pages/MyVotingSessions"));
 
 function AppRouter() {
+  const { address, isConnected } = useAccount();
+
   return (
     <Suspense>
       <Routes>
@@ -35,11 +37,15 @@ function AppRouter() {
           element={<NewVotingSession/>}
         />
 
-        <Route
-          key={"myVotingSessions"}
-          path={"/my-voting-sessions"}
-          element={<WalletGuard Component={MyVotingSessions} props={{}}/>}
-        />
+        {(!isConnected || address === undefined)
+          ? <></>  
+          : (<Route
+              key={"myVotingSessions"}
+              path={"/my-voting-sessions"}
+              element={<MyVotingSessions/>}
+            />
+          )
+        }
 
         <Route
           key={"default"}

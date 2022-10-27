@@ -1,15 +1,14 @@
+import { useAccount } from "wagmi";
 import MyVotingSessionList from "../components/my-voting-session-list";
 import { listVotingSessionsByChairmanMock } from "../services/mocks/VotingSessionServiceMock";
 
-interface PropType {
-  wallet?: string
-}
+function MyVotingSessionsPage() {
+  const { address } = useAccount();
 
-function MyVotingSessionsPage({ wallet = "" }: PropType) {
   return (
     <>
-      <h1 onClick={_ => alert(wallet)}>My Voting Sessions</h1>
-      <MyVotingSessionList getVotingSessions={listVotingSessionsByChairmanMock} wallet={wallet}/>
+      <h1 onClick={_ => alert(address!)}>My Voting Sessions</h1>
+      <MyVotingSessionList getVotingSessions={listVotingSessionsByChairmanMock} wallet={address!}/>
     </>
   );
 }

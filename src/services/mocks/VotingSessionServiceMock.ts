@@ -46,9 +46,9 @@ export const listVotingSessionsMock: ListVotingSessions = async function* (limit
 
 export const listVotingSessionsByChairmanMock: ListVotingSessionsByChairman = 
   async function*(chairman, limit, offset) {
-    while(offset < 3) {
+    while(true) {
       const res = votingSessions;
       yield res;
-      offset += 1;
+      //offset += 1;
     }
   }

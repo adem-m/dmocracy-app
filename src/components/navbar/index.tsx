@@ -14,13 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import styles from "./navbar.module.scss";
-
-const pages = {
-  "Home": "/",
-  "Voting Sessions": "/voting-sessions",
-  "Create Voting Session": "/new-voting-session",
-  "My Sessions": "/my-voting-sessions"
-}
+import NAVRULES from '../../rules/nav-rules';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -91,12 +85,15 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {Object.entries(pages).map(([key, value]: [string, string]) => (
+              {Object
+                .entries(NAVRULES)
+                .filter(([_, value]) => !value.isWalletRequired || (address !== undefined && isConnected))
+                .map(([key, value]) => (
                 <MenuItem key={key} onClick={handleCloseNavMenu}>
                   <NavLink 
                     key={key}
                     className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
-                    to={value} end>
+                    to={value.path} end>
                       {key}
                   </NavLink>
                 </MenuItem>
@@ -123,11 +120,14 @@ function ResponsiveAppBar() {
             DMOCRACY
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {Object.entries(pages).map(([key, value]: [string, string]) => (
+            {Object
+              .entries(NAVRULES)
+              .filter(([_, value]) => !value.isWalletRequired || (address !== undefined && isConnected))
+              .map(([key, value]) => (
               <NavLink 
                 key={key}
                 className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
-                to={value} end>
+                to={value.path} end>
                 {key}
               </NavLink>
             ))}
