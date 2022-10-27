@@ -28,7 +28,7 @@ function AppRouter() {
         <Route
           key={"votingSession"}
           path={"/voting-sessions/:votingSessionId"}
-          element={<VotingSession getVotingSession={getVotingSessionMock} />}
+          element={<VotingSession/>}
           />
 
         <Route

@@ -7,7 +7,7 @@ function MyVotingSessionsPage() {
 
   return (
     <>
-      <h1 onClick={_ => alert(address!)}>My Voting Sessions</h1>
+      <h1>My Voting Sessions</h1>
       <MyVotingSessionList getVotingSessions={listVotingSessionsByChairmanMock} wallet={address!}/>
     </>
   );

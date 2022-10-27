@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import VotingSession from "../components/voting-session";
-import { VotingSessionModel } from "../models/VotingSessionModel";
-import { GetVotingSession } from "../services/definitions/VotingSessionService";
+import { getVotingSessionMock } from "../services/mocks/VotingSessionServiceMock";
 
-interface PropType {
-  getVotingSession: GetVotingSession
-}
-
-function VotingSessionPage({ getVotingSession }: PropType) {
+function VotingSessionPage() {
   const { votingSessionId } = useParams();
-  const [votingSession, setVotingSession] = useState<VotingSessionModel | null>(null);
-
-  useEffect(() => {
-    if (typeof votingSessionId !== "string") { return; }
-    getVotingSession(votingSessionId)
-      .then(vs => setVotingSession(vs))
-      .catch(console.error)
-  }, [])
-
-  if (votingSession === null) {
+  
+  if (votingSessionId === undefined) {
     return (<></>);
   }
 
   return (
     <>
-      <h2>Voting Session n°{votingSession.id}</h2>
-      <VotingSession votingSession={votingSession}/>
+      <h2>Voting Session n°{votingSessionId}</h2>
+      <VotingSession votingSessionId={votingSessionId} getVotingSession={getVotingSessionMock}/>
     </>
   );
 }

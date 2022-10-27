@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VotingSessionModel } from "../../models/VotingSessionModel";
+import { GetVotingSession } from "../../services/definitions/VotingSessionService";
 import ProposalItem from "../proposal-item";
 import styles from "./voting-session.module.scss";
 
 interface PropType {
-  votingSession: VotingSessionModel
+  votingSessionId: string;
+  getVotingSession: GetVotingSession;
 }
 
-function VotingSession({ votingSession }: PropType) {
-  const [isOpen, setIsOpen] = useState(votingSession.isOpen);
-  const [ratings, setRatings] = useState(Array(votingSession.proposals.length).fill(1));
+function VotingSession({ votingSessionId, getVotingSession }: PropType) {
+  const [ratings, setRatings] = useState<number[]>([]);
+  const [votingSession, setVotingSession] = useState<VotingSessionModel | null>(null);
+
+  useEffect(() => {
+    getVotingSession(votingSessionId)
+      .then(vs => setVotingSession(vs))
+      .catch(console.error)
+  }, [])
+
+  useEffect(() => {
+    if (votingSession === null) { return; }
+    setRatings(Array(votingSession.proposals.length).fill(1));
+  }, [votingSession])
 
   function onScoreUpdated(index: number, newScore: number) {
+    if (votingSession === null) { return; }
     if (index < 0 || votingSession.proposals.length <= index) { return; }
     if (newScore < 1 || 5 < newScore) { return; }
 
@@ -20,9 +34,13 @@ function VotingSession({ votingSession }: PropType) {
     setRatings(newRatings);
   }
 
+  if (votingSession === null) {
+    return (<h2>Voting session not found !</h2>);
+  }
+
   return (
     <div className={styles.votingSessionContainer}>
-      <p onClick={_ => setIsOpen(!isOpen)}>Chairman: {votingSession.chairman}</p>
+      <p>Chairman: {votingSession.chairman}</p>
       <p>{votingSession.description}</p>
       <ul>
         {votingSession.proposals.map((p, idx) => (
@@ -30,12 +48,12 @@ function VotingSession({ votingSession }: PropType) {
             key={idx} 
             index={idx} 
             proposal={p} 
-            isVotingModeOn={isOpen} 
+            isVotingModeOn={votingSession.isOpen} 
             onScoreUpdated={onScoreUpdated}/>
           )
         )}
       </ul>
-      {isOpen
+      {votingSession.isOpen
         ? <button onClick={_ => alert(ratings)}>Vote</button>
         : <></>
       }
