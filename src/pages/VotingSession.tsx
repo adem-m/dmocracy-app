@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import VotingSession from "../components/voting-session";
-import { getVotingSessionMock } from "../services/mocks/VotingSessionServiceMock";
+import { getVotingSessionWeb } from "../services/web/VotingSessionServiceWeb";
 
 function VotingSessionPage() {
   const { votingSessionId } = useParams();
@@ -12,7 +12,7 @@ function VotingSessionPage() {
   return (
     <>
       <h2>Voting Session n°{votingSessionId}</h2>
-      <VotingSession votingSessionId={votingSessionId} getVotingSession={getVotingSessionMock}/>
+      <VotingSession votingSessionId={votingSessionId} getVotingSession={getVotingSessionWeb}/>
     </>
   );
 }

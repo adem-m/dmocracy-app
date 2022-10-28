@@ -7,7 +7,7 @@ import styles from "./voting-session-form.module.scss";
 function VotingSessionForm() {
   const [description, setDescription] = useState("");
   const [proposals, setProposals] = useState<string[]>(["", ""]);
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
 
   function addProposalListener(e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
@@ -48,7 +48,6 @@ function VotingSessionForm() {
       alert("You are not connected.");
       return;
     }
-    alert(`${address}\n${description}\n${proposals.join(" ")}`);
   }
 
   return (
