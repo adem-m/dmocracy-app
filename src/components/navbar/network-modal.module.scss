@@ -1,0 +1,17 @@
+.networkModalContainer {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  .networkModal {
+    margin: auto;
+  }
+}

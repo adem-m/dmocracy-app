@@ -15,6 +15,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import styles from "./navbar.module.scss";
 import NAVRULES from '../../rules/nav-rules';
+import NetworkModal from './network-modal';
+
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -33,130 +36,133 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            DMOCRACY
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              className={styles.mobileMenu}
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+    <>
+      <NetworkModal canBeDisplayed={isConnected}/>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
               sx={{
-                display: { xs: 'block', md: 'none' },
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
               }}
             >
+              DMOCRACY
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                className={styles.mobileMenu}
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {Object
+                  .entries(NAVRULES)
+                  .filter(([_, value]) => !value.isWalletRequired || (address !== undefined && isConnected))
+                  .map(([key, value]) => (
+                  <MenuItem key={key} onClick={handleCloseNavMenu}>
+                    <NavLink 
+                      key={key}
+                      className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
+                      to={value.path} end>
+                        {key}
+                    </NavLink>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              DMOCRACY
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {Object
                 .entries(NAVRULES)
                 .filter(([_, value]) => !value.isWalletRequired || (address !== undefined && isConnected))
                 .map(([key, value]) => (
-                <MenuItem key={key} onClick={handleCloseNavMenu}>
-                  <NavLink 
-                    key={key}
-                    className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
-                    to={value.path} end>
-                      {key}
-                  </NavLink>
-                </MenuItem>
+                <NavLink 
+                  key={key}
+                  className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
+                  to={value.path} end>
+                  {key}
+                </NavLink>
               ))}
-            </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            DMOCRACY
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {Object
-              .entries(NAVRULES)
-              .filter(([_, value]) => !value.isWalletRequired || (address !== undefined && isConnected))
-              .map(([key, value]) => (
-              <NavLink 
-                key={key}
-                className={({ isActive }) => isActive ? styles.navLinkActive : styles.navLink }
-                to={value.path} end>
-                {key}
-              </NavLink>
-            ))}
-          </Box>
+            </Box>
 
-          <Box 
-            sx={{ 
-              flexGrow: 0, 
-              display: "flex", 
-              flexDirection: "row", 
-              alignItems: "baseline" 
-          }}>
-            <Typography
-              sx={{
-                mr: 2,
-                display: { xs: "none", lg: "flex" }
+            <Box 
+              sx={{ 
+                flexGrow: 0, 
+                display: "flex", 
+                flexDirection: "row", 
+                alignItems: "baseline" 
             }}>
-              {address}
-            </Typography>
-            <Tooltip title={isConnected ? "Disconnect Wallet" : "Connect Wallet"}>
-              { isConnected 
-                ? <button className={styles.disconnectionBtn} onClick={_ => disconnect()}>Disconnect Wallet</button>
-                : <button className={styles.connectionBtn} onClick={_ => connect()}>Connect Wallet</button>
-              }
-            </Tooltip>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              <Typography
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", lg: "flex" }
+              }}>
+                {address}
+              </Typography>
+              <Tooltip title={isConnected ? "Disconnect Wallet" : "Connect Wallet"}>
+                { isConnected 
+                  ? <button className={styles.disconnectionBtn} onClick={_ => disconnect()}>Disconnect Wallet</button>
+                  : <button className={styles.connectionBtn} onClick={_ => connect()}>Connect Wallet</button>
+                }
+              </Tooltip>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   );
 }
 export default ResponsiveAppBar;
