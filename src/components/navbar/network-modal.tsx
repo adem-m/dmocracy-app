@@ -5,7 +5,7 @@ import styles from "./network-modal.module.scss";
 const CHAIN_ID = Number.parseInt(import.meta.env.VITE_CHAIN_ID);
 
 interface NetworkModalProps {
-  canBeDisplayed: boolean
+  canBeDisplayed: boolean;
 }
 
 function NetworkModal({ canBeDisplayed }: NetworkModalProps) {
@@ -18,18 +18,18 @@ function NetworkModal({ canBeDisplayed }: NetworkModalProps) {
 
   useEffect(() => { 
     setIsDisplayed(_ => canBeDisplayed && chain?.id !== undefined && chain.id !== CHAIN_ID)
-  }, [chain])
+  }, [chain?.id])
 
   useEffect(() => {
     if (isLoading || pendingChainId !== CHAIN_ID) {
       return;
     }
-    setIsDisplayed(_ => false);
+    console.log(isLoading, pendingChainId)
   }, [isLoading, pendingChainId])
 
   function handleSwitchNetwork(e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    switchNetwork?.();
+    switchNetwork?.(CHAIN_ID);
   }
 
   if (!isDisplayed) {
