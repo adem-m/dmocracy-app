@@ -3,7 +3,7 @@ import VotingSessionForm from "../components/voting-session-form";
 function NewVotingSession() {
   return (
     <>
-      <h1>New Voting Session</h1>
+      <h2>New Voting Session</h2>
       <VotingSessionForm/>
     </>
   );

@@ -1,3 +1,4 @@
+import Paper from "@mui/material/Paper";
 import { providers } from "ethers";
 import { BrowserRouter } from "react-router-dom";
 import { createClient, WagmiConfig } from "wagmi";
@@ -15,7 +16,9 @@ function App() {
     <WagmiConfig client={web3Client}>
       <BrowserRouter>
         <Navbar/>
-        <AppRouter/>
+          <Paper className="paper" elevation={3}>
+              <AppRouter/>
+          </Paper>
       </BrowserRouter>
     </WagmiConfig>
   );

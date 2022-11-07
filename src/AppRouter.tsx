@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAccount } from "wagmi";
-import { getVotingSessionMock } from "./services/mocks/VotingSessionServiceMock";
 
 const Home = lazy(() => import("./pages/Home"));
 const VotingSessions = lazy(() => import("./pages/VotingSessions"));
