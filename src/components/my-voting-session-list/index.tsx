@@ -13,7 +13,7 @@ interface PropType {
 function MyVotingSessionList({ wallet, getVotingSessions }: PropType) {
   const [canLoad, setCanLoad] = useState(true);
   const [votingSessions, setVotingSessions] = useState<VotingSessionItemModel[]>([]);
-  let ite = useRef(getVotingSessions(wallet, 1, 0));
+  let ite = useRef(getVotingSessions(wallet, 20, 0));
 
   // useEffect(() => {
   //   console.log("First")
@@ -23,7 +23,7 @@ function MyVotingSessionList({ wallet, getVotingSessions }: PropType) {
   useEffect(() => {
     setCanLoad(true);
     setVotingSessions(_ => []);
-    ite.current = getVotingSessions(wallet, 1, 0);
+    ite.current = getVotingSessions(wallet, 20, 0);
     iterList([]);
   }, [wallet])
 
