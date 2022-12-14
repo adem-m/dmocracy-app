@@ -8,14 +8,15 @@ interface PropType {
 
 function VotingSessionItem({ votingSession }: PropType) {
   const navigate = useNavigate();
+  // @ts-ignore
+    const {sessionId} = votingSession;
 
   return (
     <li 
       className={styles.item}
-      onClick={_ => navigate(`/voting-sessions/${votingSession.id}`)}>
+      onClick={_ => navigate(`/voting-sessions/${sessionId}`)}>
       <div>
-        <p>Chairman: {votingSession.chairman}</p>
-        <p>Description: {votingSession.description}</p>
+        <p>{votingSession.description}</p>
       </div>
     </li>
   );

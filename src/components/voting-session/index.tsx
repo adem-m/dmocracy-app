@@ -40,7 +40,6 @@ function VotingSession({ votingSessionId, getVotingSession }: PropType) {
 
   return (
     <div className={styles.votingSessionContainer}>
-      <p>Chairman: {votingSession.chairman}</p>
       <p>{votingSession.description}</p>
       <ul>
         {votingSession.proposals.map((p, idx) => (

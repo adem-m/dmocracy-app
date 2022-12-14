@@ -25,9 +25,8 @@ function VotingSessionList({ getVotingSessions }: PropType) {
       .then(vs => {
         if (vs.value !== undefined) { 
           setVotingSessions(prevData.concat(vs.value))
-        }     
+        }
         if (vs.done) {
-          console.log("Here")
           setCanLoad(false);
         }
       })
