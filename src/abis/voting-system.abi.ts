@@ -82,7 +82,7 @@ export default [
           },
           {
             "internalType": "uint256",
-            "name": "score",
+            "name": "decidingVote",
             "type": "uint256"
           }
         ],
@@ -125,6 +125,37 @@ export default [
         "internalType": "struct VotingSystem.VotingSession[]",
         "name": "",
         "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_votingSessionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWinningProposal",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "content",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "decidingVote",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct VotingSystem.Proposal",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",

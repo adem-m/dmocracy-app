@@ -8,6 +8,7 @@ import {
 import {useAccount} from "wagmi";
 import ProposalInput from "../proposal-input";
 import styles from "./voting-session-form.module.scss";
+import {initVotingSession} from "../../services/blockchain/VotingSessionServiceBlockchain";
 
 function VotingSessionForm() {
     const [description, setDescription] = useState("");
@@ -61,6 +62,14 @@ function VotingSessionForm() {
             alert("You are not connected.");
             return;
         }
+        try {
+            await initVotingSession(description, proposals);
+            alert("Voting session created");
+        } catch (e) {
+            console.log(e);
+            alert("Could not initiate voting session");
+        }
+
     }
 
     return (

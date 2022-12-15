@@ -1,5 +1,4 @@
 import VotingSessionList from "../components/voting-session-list";
-import { listVotingSessionsMock } from "../services/mocks/VotingSessionServiceMock";
 import { listVotingSessionsWeb } from "../services/web/VotingSessionServiceWeb";
 
 export function VotingSessionsPage() {

@@ -23,7 +23,7 @@ export const listVotingSessionsWeb: ListVotingSessions = async function* (limit,
                 throw new Error(res.statusText);
             });
 
-        yield res.data.map((value: any[], index: any) => {
+        yield res.data[0].map((value: any[], index: any) => {
             return {
                 description: value[0],
                 chairman: null,
