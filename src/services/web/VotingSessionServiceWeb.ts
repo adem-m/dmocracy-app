@@ -1,4 +1,4 @@
-import {GetVotingSession, ListVotingSessions, ListVotingSessionsByChairman} from "../definitions/VotingSessionService";
+import {GetVotingSession, ListVotingSessions} from "../definitions/VotingSessionService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -27,7 +27,8 @@ export const listVotingSessionsWeb: ListVotingSessions = async function* (limit,
             return {
                 description: value[0],
                 chairman: null,
-                sessionId: index
+                sessionId: index,
+                isOpen: value[1]
             }
         });
         nextUrl = res.next;
@@ -35,19 +36,11 @@ export const listVotingSessionsWeb: ListVotingSessions = async function* (limit,
     } while (nextUrl);
 }
 
-export const listVotingSessionsByChairmanWeb: ListVotingSessionsByChairman = async function* (chairman, limit, offset) {
-    let nextUrl: string | null = `${API_URL}voting-sessions/chairman/${chairman}?limit=${limit}&offset=${offset}`;
-    do {
-        const res: any = await fetch(nextUrl)
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                throw new Error(res.statusText);
-            });
-
-        yield res.data;
-        nextUrl = res.next;
-
-    } while (nextUrl);
-}
+export const getWinningProposal = async (id: string): Promise<string> => {
+    const url = `${API_URL}voting-sessions/${id}/winner`;
+    const res = await fetch(url)
+    if (res.ok) {
+        return (await res.json())[0][0];
+    }
+    throw new Error(res.statusText);
+};

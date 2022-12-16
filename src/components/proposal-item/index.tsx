@@ -22,7 +22,6 @@ function ProposalItem({ index, proposal, isVotingModeOn, onScoreUpdated }: PropT
         <p>{proposal.content}</p>
         { isVotingModeOn
           ? <Rating
-              defaultValue={1}
               onChange={(_, newValue) => {
                 if (newValue !== null) {
                   onScoreUpdated(index, newValue);

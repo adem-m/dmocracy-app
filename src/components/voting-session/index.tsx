@@ -5,6 +5,7 @@ import ProposalItem from "../proposal-item";
 import styles from "./voting-session.module.scss";
 import {vote} from "../../services/blockchain/VotingSessionServiceBlockchain";
 import {useAccount} from "wagmi";
+import {getWinningProposal} from "../../services/web/VotingSessionServiceWeb";
 
 interface PropType {
     votingSessionId: string;
@@ -14,6 +15,7 @@ interface PropType {
 function VotingSession({votingSessionId, getVotingSession}: PropType) {
     const [ratings, setRatings] = useState<number[]>([]);
     const [votingSession, setVotingSession] = useState<VotingSessionModel | null>(null);
+    const [winningProposal, setWinningProposal] = useState<string | null>(null);
     const {isConnected} = useAccount();
 
     useEffect(() => {
@@ -26,7 +28,9 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
         if (votingSession === null) {
             return;
         }
-        setRatings(Array(votingSession.proposals.length).fill(1));
+        if (!votingSession.isOpen) {
+            fetchWinningProposal().then();
+        }
     }, [votingSession])
 
     function onScoreUpdated(index: number, newScore: number) {
@@ -50,6 +54,8 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
     }
 
     async function handleOnClick() {
+        if (ratings.length !== votingSession?.proposals.length)
+            return;
         try {
             await vote(votingSessionId, ratings);
             alert("You successfully voted");
@@ -58,24 +64,46 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
         }
     }
 
+    async function fetchWinningProposal() {
+        const wp = await getWinningProposal(votingSessionId);
+        setWinningProposal(wp);
+    }
+
     return (
         <div className={styles.votingSessionContainer}>
             <p>{votingSession.description}</p>
-            <ul>
-                {votingSession.proposals.map((p, idx) => (
-                        <ProposalItem
-                            key={idx}
-                            index={idx}
-                            proposal={p}
-                            isVotingModeOn={votingSession.isOpen}
-                            onScoreUpdated={onScoreUpdated}/>
-                    )
-                )}
-            </ul>
-            {votingSession.isOpen && isConnected
-                ? <button onClick={handleOnClick}>Vote</button>
-                : <></>
+            {
+                votingSession.isOpen &&
+                <>
+                    <ul>
+                        {votingSession.proposals.map((p, idx) => (
+                                <ProposalItem
+                                    key={idx}
+                                    index={idx}
+                                    proposal={p}
+                                    isVotingModeOn={votingSession.isOpen}
+                                    onScoreUpdated={onScoreUpdated}/>
+                            )
+                        )}
+                    </ul>
+                    {
+                        votingSession.isOpen && isConnected &&
+                        <button onClick={handleOnClick}>Vote</button>
+                    }
+                </>
             }
+            {
+                !votingSession.isOpen &&
+                <>
+                    <h3>Proposals</h3>
+                    {
+                        votingSession.proposals.map((proposal, i) => <div key={i}>{proposal.content}</div>)
+                    }
+                    <h2>Winning proposal</h2>
+                    <h4>{winningProposal}</h4>
+                </>
+            }
+
         </div>
     );
 }
