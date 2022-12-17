@@ -4,7 +4,7 @@ import { listVotingSessionsWeb } from "../services/web/VotingSessionServiceWeb";
 export function VotingSessionsPage() {
   return (
     <>
-      <h2>Active voting sessions</h2>
+      <h2>Voting sessions</h2>
       <VotingSessionList getVotingSessions={listVotingSessionsWeb}/>
     </>
   );

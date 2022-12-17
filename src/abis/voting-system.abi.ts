@@ -98,6 +98,42 @@ export default [
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "_votingSessionId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getVotingSession",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "isOpen",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "closingTime",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct VotingSystem.VotingSession",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "_from",
         "type": "uint256"
       },
@@ -120,6 +156,11 @@ export default [
             "internalType": "bool",
             "name": "isOpen",
             "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "closingTime",
+            "type": "uint256"
           }
         ],
         "internalType": "struct VotingSystem.VotingSession[]",
@@ -195,30 +236,6 @@ export default [
     "name": "vote",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "votingSessions",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "internalType": "bool",
-        "name": "isOpen",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   }
 ] as const;

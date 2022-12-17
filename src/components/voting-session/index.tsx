@@ -20,7 +20,10 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
 
     useEffect(() => {
         getVotingSession(votingSessionId)
-            .then(vs => setVotingSession(vs))
+            .then(vs => {
+                vs.isOpen = Boolean(vs.description[1]);
+                setVotingSession(vs)
+            })
             .catch(console.error)
     }, [])
 
@@ -71,7 +74,7 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
 
     return (
         <div className={styles.votingSessionContainer}>
-            <p>{votingSession.description}</p>
+            <p>{votingSession.description[0]}</p>
             {
                 votingSession.isOpen &&
                 <>
