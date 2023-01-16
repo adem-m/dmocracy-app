@@ -48,7 +48,7 @@ function VotingSession({votingSessionId, getVotingSession}: PropType) {
         }
 
         const newRatings = [...ratings];
-        newRatings[index] = Math.floor(newScore);
+        newRatings[index] = Math.floor(newScore - 1);
         setRatings(newRatings);
     }
 
